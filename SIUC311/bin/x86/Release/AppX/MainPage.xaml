@@ -1,0 +1,793 @@
+﻿<common:LayoutAwarePage x:Name="_311LayoutAwarePage"
+    x:Class="SIUC311.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SIUC311"
+    xmlns:common="using:SIUC311"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:bing="using:Bing.Maps"
+    mc:Ignorable="d">
+
+    <common:LayoutAwarePage.Resources>
+        <CollectionViewSource x:Name="itemsViewSource" Source="{Binding Items}"/>
+    </common:LayoutAwarePage.Resources>
+
+    <Grid x:Name="MainGrid" Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Popup x:Name="ReportPopup" VerticalOffset="88" HorizontalOffset="350">
+            <Grid x:Name="ReportPopupGrid">
+            <!--
+            <Popup.ChildTransitions>
+                <TransitionCollection>
+                    <PaneThemeTransition />
+                </TransitionCollection>
+            </Popup.ChildTransitions>
+            -->
+                <Border BorderBrush="Black" Background="Black" BorderThickness="2" Width="800" Height="642">
+                    <StackPanel>
+                        <StackPanel.Background>
+                            <LinearGradientBrush StartPoint=".5,0" EndPoint=".5,1">
+                                <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                            </LinearGradientBrush>
+                        </StackPanel.Background>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="375"/>
+                                <RowDefinition Height="150"/>
+                                <RowDefinition Height="60"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock x:Name="ReportPopupTitle" Grid.Row="0" Text="Report" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>
+
+                            <Button x:ConnectionId='34' x:Name="CloseReportPopupButton" Padding="3" Margin="0,5,4,0" FontFamily="Segoe UI Symbol" Content="&#xE10A;" Width="42" Height="42" HorizontalAlignment="Right"                                  Visibility="Visible" Foreground="Black" BorderBrush="Black">
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                        <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+
+                            <Grid Grid.Row="1">
+                                <Image x:Name="ReportPhoto" AutomationProperties.Name="A placeholder image" Source="Assets/ImagePlaceHolder.png" HorizontalAlignment="Center" VerticalAlignment="Top" Height="375" Visibility="Visible" Margin="0,0,0,0"/>
+                            </Grid>
+
+                            <Grid Grid.Row="2" Margin="65,10,10,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="240"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="200"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="60"/>
+                                    <RowDefinition Height="20"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock x:Name="ReportTypeBlock" Text="Type:" Grid.Column="0" Grid.Row="0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Visible" Foreground="Black"/>
+                                <TextBlock x:Name="ReportType" Text="" Grid.Column="1" Grid.Row="0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Visible" Foreground="Black"/>
+
+                                <TextBlock x:Name="ReportTimeBlock" Text="Time:" Grid.Column="3" Grid.Row="0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Visible" Foreground="Black"/>
+                                <TextBlock x:Name="ReportTime" Text="" Grid.Column="4" Grid.Row="0" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Visible" Foreground="Black"/>
+
+                                <TextBlock x:Name="ReportStatusBlock" Text="Status:" Grid.Column="3" Grid.Row="1" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Visible" Foreground="Black"/>
+                                <TextBlock x:Name="ReportStatus" Text="" Grid.Column="4" Grid.Row="1" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Visible" Foreground="Black"/>
+
+                                <TextBlock x:Name="ReportPriorityBlock" Text="Priority:" Grid.Column="3" Grid.Row="1" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Bottom" Visibility="Visible" Foreground="Black"/>
+                                <TextBlock x:Name="ReportPriority" Text="" Grid.Column="4" Grid.Row="1" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Bottom" Visibility="Visible" Foreground="Black"/>
+
+                                <TextBlock x:Name="ReportAuthorBlock" Text="Owner:" Grid.Column="3" Grid.Row="2" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Bottom" Visibility="Visible" Foreground="Black"/>
+                                <TextBlock x:Name="ReportAuthor" Text="" Grid.Column="4" Grid.Row="2" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Bottom" Visibility="Visible" Foreground="Black"/>
+
+                                <TextBlock x:Name="ReportLocationBlock" Text="Location:" Grid.Column="0" Grid.Row="1" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Visible" Foreground="Black"/>
+                                <TextBlock x:Name="ReportLocation" TextWrapping="Wrap" Text="" Grid.Column="1" Grid.Row="1" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Visible" Foreground="Black"/>
+                                <TextBlock x:Name="ReportDescriptionBlock" Text="Description:" Grid.Column="0" Grid.Row="2" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Visible" Foreground="Black"/>
+                                <TextBlock x:Name="ReportDescription" TextWrapping="Wrap" Text="" Grid.Column="1" Grid.Row="2" Grid.RowSpan="4" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Visible" Foreground="Black"/>
+                            </Grid>
+
+                            <Grid Grid.Row="3">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button x:ConnectionId='35' x:Name="CloseReportButton" Grid.Column="0" Grid.Row="1" Content="Close Report"                            HorizontalAlignment="Center" Margin="0,0,0,0" Foreground="Black" BorderBrush="Black" Visibility="Collapsed">
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                            <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+
+                                <Button x:ConnectionId='36' x:Name="OpenReportButton" Grid.Column="0" Grid.Row="1" Content="Open Report"                           HorizontalAlignment="Center" Margin="0,0,0,0" Foreground="Black" BorderBrush="Black" Visibility="Collapsed">
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                            <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+
+                                <Button x:ConnectionId='37' x:Name="ElevateReportButton" Grid.Column="1" Grid.Row="1" Content="Elevate"                              HorizontalAlignment="Center" Margin="0,0,0,0" Foreground="Black" BorderBrush="Black" Visibility="Collapsed">
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                            <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+
+                                <Button x:ConnectionId='38' x:Name="ClaimReportButton" Grid.Column="2" Grid.Row="1" Content="Claim"                            HorizontalAlignment="Center" Margin="0,0,0,0" Foreground="Black" BorderBrush="Black" Visibility="Collapsed">
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                            <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+
+                                <ProgressBar x:Name="ReportPopupProgressBar" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" HorizontalAlignment="Center" IsIndeterminate="True" Height="20" Width="775" Margin="25,0,25,0" Visibility="Collapsed"/>
+                                <Button x:ConnectionId='39' x:Name="SubmitQueuedReportPopupButton" Grid.Column="4" Grid.Row="1" Content="Submit"                                   HorizontalAlignment="Center" Margin="0,0,0,0" Foreground="Black" BorderBrush="Black" Visibility="Collapsed">
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                            <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+                                <Button x:ConnectionId='40' x:Name="RemoveReportPopupButton" Grid.Column="5" Grid.Row="1" Content="Remove"                             HorizontalAlignment="Center" Margin="0,0,0,0" Foreground="Black" BorderBrush="Black" Visibility="Collapsed">
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                            <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+                                <Button x:ConnectionId='41' x:Name="RemoveQueuedReportPopupButton" Grid.Column="5" Grid.Row="1" Content="Remove"                                   HorizontalAlignment="Center" Margin="0,0,0,0" Foreground="Black" BorderBrush="Black" Visibility="Visible">
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                            <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Popup>
+
+        <Popup x:Name="ReportFormPopup" VerticalOffset="88" HorizontalOffset="350">
+            <Grid x:Name="ReportFormPopupGrid">
+                <Border BorderBrush="Black" Background="Black" BorderThickness="2" Width="750" Height="642">
+                    <StackPanel>
+                        <StackPanel.Background>
+                            <LinearGradientBrush StartPoint=".5,0" EndPoint=".5,1">
+                                <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                            </LinearGradientBrush>
+                        </StackPanel.Background>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="325"/>
+                                <RowDefinition Height="200"/>
+                                <RowDefinition Height="60"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock x:Name="ReportFormPopupTitle" Grid.Row="0" Text="Report Form" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>
+
+                            <Button x:ConnectionId='27' x:Name="CloseReportFormPopupButton" Padding="3" Margin="0,5,4,0" FontFamily="Segoe UI Symbol" Content="&#xE10A;" Width="42" Height="42" HorizontalAlignment="Right"                              Visibility="Visible" Foreground="Black" BorderBrush="Black">
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                        <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+
+                            <Grid Grid.Row="1">
+                                <Image x:Name="ReportFormPhoto" AutomationProperties.Name="A placeholder image" Source="Assets/ImagePlaceHolder.png" HorizontalAlignment="Center" VerticalAlignment="Top" Height="325" Visibility="Visible" Margin="0,0,0,0"/>
+                            </Grid>
+
+                            <Grid Grid.Row="2" Margin="65,10,10,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="25"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="190"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock x:Name="PopupUserNameBlock" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="16" Text="USERNAME" Visibility="Visible" Grid.Row="0" Grid.Column="0" Foreground="Black"/>
+                                    <TextBlock x:Name="PopupPermissionsBlock" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="16" Text="" Visibility="Visible" Grid.Row="0" Grid.Column="1" Width="52" Foreground="Blue"/>
+                                    <TextBlock x:Name="PopupDomainNameBlock" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="16" Text="DOMAIN" Visibility="Visible" Grid.Row="1" Grid.Column="0" Foreground="Black"/>
+                                </Grid>
+
+                                <TextBlock x:Name="TypeBlock" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="25" Width="253" Visibility="Visible" Grid.Column="0" Grid.Row="0" Foreground="Black" />
+                                <ComboBox x:ConnectionId='31' x:Name="TypeCombobox" SelectedIndex="1" HorizontalAlignment="Left" VerticalAlignment="Top"                                              Grid.Column="0" Grid.Row="1" Width="246">
+                                    <ComboBoxItem Content="Pothole"/>
+                                    <ComboBoxItem Content="Broken parking meter"/>
+                                    <ComboBoxItem Content="Stolen property"/>
+                                    <ComboBoxItem Content="Stray animal"/>
+                                    <ComboBoxItem Content="Animal Bite"/>
+                                    <ComboBoxItem Content="Garbage Collection"/>
+                                    <ComboBoxItem Content="Abandon automobile"/>
+                                    <ComboBoxItem Content="Abandon property"/>
+                                    <ComboBoxItem Content="Illegal parking"/>
+                                    <ComboBoxItem Content="Illegal dumping"/>
+                                    <ComboBoxItem Content="Street light repair"/>
+                                    <ComboBoxItem Content="Tree services"/>
+                                    <ComboBoxItem Content="Plumbing"/>
+                                    <ComboBoxItem Content="Trash"/>
+                                    <ComboBoxItem Content="Building damages"/>
+                                    <ComboBoxItem Content="Graffiti"/>
+                                    <ComboBoxItem Content="Sidewalk condition"/>
+                                    <ComboBoxItem Content="Lost property"/>
+                                    <ComboBoxItem Content="Dangerous weather"/>
+                                    <ComboBoxItem Content="Other"/>
+                                </ComboBox>
+
+                                <TextBlock x:Name="DescriptionBlock" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="25" Width="260" Grid.Column="0" Grid.Row="2" Visibility="Visible" Foreground="Black"/>
+                                <TextBox x:ConnectionId='32'   x:Name="DescriptionTextbox"                              HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="100" Width="275" Grid.Column="0" Grid.Row="3" MaxLength="500"/>
+
+                                <TextBlock x:Name="LocationBlock" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="25" Width="260" Grid.Column="1" Grid.Row="2" Visibility="Visible" Foreground="Black"/>
+                                <TextBox x:ConnectionId='33'   x:Name="LocationTextbox"                           HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="100" Width="255" Grid.Column="1" Grid.Row="3" MaxLength="250"/>
+
+                                <Grid x:Name="InfoGrid"  Margin="15,195,7,131" Grid.RowSpan="2" Visibility="Collapsed" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="90" />
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" Text="Time:" VerticalAlignment="Top" Foreground="Black"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" Text="Latitude:" VerticalAlignment="Top" Foreground="Black"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" Text="Longitude:" VerticalAlignment="Top" Foreground="Black"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" Text="Accuracy:" VerticalAlignment="Top" Foreground="Black"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="0" FontSize="15" HorizontalAlignment="Left" Text="Direction:" VerticalAlignment="Top" Foreground="Black"/>
+
+                                    <TextBlock Grid.Row="0" Grid.Column="1" FontSize="14" HorizontalAlignment="Left" x:Name="TimeTextblock" Text="" VerticalAlignment="Top" Foreground="Black"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" FontSize="14" HorizontalAlignment="Left" x:Name="LatitudeTextblock" Text="" VerticalAlignment="Top" Foreground="Black"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" FontSize="14" HorizontalAlignment="Left" x:Name="LongitudeTextblock" Text="" VerticalAlignment="Top" Foreground="Black"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="1" FontSize="14" HorizontalAlignment="Left" x:Name="AccuracyTextblock" Text="" VerticalAlignment="Top" Foreground="Black"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="1" FontSize="14" HorizontalAlignment="Left" x:Name="DirectionTextblock" Text="" VerticalAlignment="Top" Foreground="Black"/>
+                                </Grid>                               
+
+                            </Grid>
+
+                            <Grid Grid.Row="3">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+
+                                <ProgressBar x:Name="ReportFormProgressBar" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" HorizontalAlignment="Center" IsIndeterminate="True" Height="20" Width="775" Margin="25,0,25,0" Visibility="Collapsed"/>
+
+                                <Button x:ConnectionId='28' x:Name="ClearReportPopupButton" Grid.Column="0" Grid.Row="1" Content="Clear"                           HorizontalAlignment="Center" Margin="0,0,0,0" Foreground="Black" BorderBrush="Black" Visibility="Visible">
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                            <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+
+                                <Button x:ConnectionId='29' x:Name="CancelReportPopupButton" Grid.Column="1" Grid.Row="1" Content="Cancel"                              HorizontalAlignment="Center" Margin="0,0,0,0" Foreground="Black" BorderBrush="Black" Visibility="Visible">
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                            <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+
+                                <Button x:ConnectionId='30' x:Name="SubmitReportPopupButton" Grid.Column="5" Grid.Row="1" Content="Submit"                              HorizontalAlignment="Center" Margin="0,0,0,0" Foreground="Black" BorderBrush="Black" Visibility="Visible">
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                            <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Popup>
+
+        <Grid x:Name="TitleGrid" Grid.Row="0" Grid.Column="0" Height="80" Background="Maroon" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="65"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <!--<ColumnDefinition Width="100"/>-->
+                <ColumnDefinition x:Name="tgc0" Width="*"/>
+                <ColumnDefinition x:Name="tgc1" Width="100"/>
+                <ColumnDefinition x:Name="tgc2" Width="100"/>
+                <ColumnDefinition x:Name="tgc3" Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <!--<TextBlock Grid.Row="0" Grid.Column="0" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="Black" Text="Home"/>-->
+            <!--<Button Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource AppBarButtonStyle}" Foreground="Black" FontFamily="Segoe UI Symbol" Content="&#xE10F;"/>-->
+
+            <TextBlock x:Name="title" Grid.Row="0" Grid.Column="0" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="Black" Text="SIU 311 Maintenence Reporting" Margin="38,0,0,64" Grid.RowSpan="2"/>
+            <!--<Image x:Name="SliderLogo" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Source="Assets/PageLogo.png" Margin="38,6,948,0" Height="37"/>-->
+
+            <TextBlock x:Name="rvtb" Grid.Row="0" Grid.Column="1" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="Black" Text="Record Video"/>
+            <Button x:ConnectionId='24' x:Name="rvb"                            Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource AppBarButtonStyle}" Foreground="Black" FontFamily="Segoe UI Symbol" Content="&#xE116;"/>
+
+            <TextBlock x:Name="tptb" Grid.Row="0" Grid.Column="2" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="Black" Text="Take Photo"/>
+            <Button x:ConnectionId='25' x:Name="tpb"                            Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource AppBarButtonStyle}" Foreground="Black" FontFamily="Segoe UI Symbol" Content="&#xE114;"/>
+
+            <TextBlock x:Name="mrtb" Grid.Row="0" Grid.Column="3" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="Black" Text="Make Report"/>
+            <Button x:ConnectionId='26' x:Name="mrb"                          Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{StaticResource AppBarButtonStyle}" Foreground="Black" FontFamily="Segoe UI Symbol" Content="&#xE132;"/>
+
+        </Grid>
+
+        <Grid x:Name="ScrollingMainGrid" Width="Auto" Grid.Row="1">
+
+            <ScrollViewer x:Name="MainScrollViewer" Width="Auto" Style="{StaticResource HorizontalScrollViewerStyle}" VerticalScrollMode="Disabled">
+
+                <GridView x:Name="HubGridView" SelectionMode="None">
+
+                    <Grid x:Name="InnerMainGrid" RenderTransformOrigin="0.508,0.484" Height="768" HorizontalAlignment="Left">
+                        <Grid.ColumnDefinitions>
+                            <!-- 0 Controls -->
+                            <ColumnDefinition Width="330"/>
+                            <!-- 1 Report List -->
+                            <ColumnDefinition Width="385"/>
+                            <!-- 2 Map -->
+                            <ColumnDefinition Width="675"/>
+                            <!-- 3 Photo -->
+                            <ColumnDefinition Width="675"/>
+                            <!-- 4 Video -->
+                            <ColumnDefinition Width="675"/>
+                            <!-- 5 Queue -->
+                            <ColumnDefinition Width="375"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Name="ControlsBlock" Grid.Column="0" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="25" Width="266" Margin="30,0,0,743" Visibility="Visible"/>
+
+                        <Grid x:Name="ControlsGrid" Grid.Column="0" Width="300" Margin="-10,33,0,100">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="140"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="80"/>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+
+                            <Canvas x:Name="ControlsBGCanvas" Grid.RowSpan="7">
+                                <Canvas.Background>
+                                    <LinearGradientBrush StartPoint=".5,0" EndPoint=".5,1">
+                                        <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                        <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Canvas.Background>
+                            </Canvas>
+
+                            <Grid x:Name="UserGrid" Grid.Row="0" Margin="6,0,6,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="190"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>                                
+                                <TextBlock x:Name="UserNameBlock" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="18" Text="USERNAME" Visibility="Visible" Grid.Row="0" Grid.Column="0" Foreground="Black"/>
+                                <TextBlock x:Name="PermissionsBlock" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="18" Text="" Visibility="Visible" Grid.Row="0" Grid.Column="1" Foreground="Blue"/>
+                                <TextBlock x:Name="DomainNameBlock" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="18" Text="DOMAIN" Visibility="Visible" Grid.Row="1" Grid.ColumnSpan="2" Foreground="Black"/>
+                            </Grid>
+
+                            <Grid x:Name="QueryGrid" Grid.Row="1" Margin="6,0,6,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40" />
+                                    <ColumnDefinition Width="120" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>                                    
+                                    <RowDefinition Height="28"/>
+                                    <RowDefinition Height="28"/>
+                                    <RowDefinition Height="28"/>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="100"/>
+                                </Grid.RowDefinitions>
+                                <RadioButton x:ConnectionId='18' x:Name="AllReportsRadioButton" Grid.Row="0" Grid.Column="0" GroupName="QBSelect"                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <RadioButton x:ConnectionId='19' x:Name="MyReportsRadioButton" Grid.Row="1" Grid.Column="0" GroupName="QBSelect"                                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <CheckBox x:ConnectionId='20' x:Name="ReportsByTypeCheckBox" Grid.Row="2" Grid.Column="0"                                                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                                <TextBlock x:ConnectionId='21' x:Name="SelectAllTextblock" Grid.Row="0" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Text="All reports." Foreground="Black"                                  />
+                                <TextBlock x:ConnectionId='22' x:Name="SelectMyTextblock" Grid.Row="1" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Text="My reports." Foreground="Black"                                />
+                                <TextBlock x:Name="SelectGroupTextblock" Grid.Row="2" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Reports by type." Foreground="Black"/>
+
+                                <ComboBox x:ConnectionId='23' x:Name="ReportTypeCombobox" Grid.Row="3" Grid.ColumnSpan="2"                                                    SelectedIndex="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="195" Visibility="Collapsed" Margin="9,0,-51,2">
+                                    <ComboBoxItem Content="Pothole"/>
+                                    <ComboBoxItem Content="Broken parking meter"/>
+                                    <ComboBoxItem Content="Stolen property"/>
+                                    <ComboBoxItem Content="Stray animal"/>
+                                    <ComboBoxItem Content="Animal Bite"/>
+                                    <ComboBoxItem Content="Garbage Collection"/>
+                                    <ComboBoxItem Content="Abandon automobile"/>
+                                    <ComboBoxItem Content="Abandon property"/>
+                                    <ComboBoxItem Content="Illegal parking"/>
+                                    <ComboBoxItem Content="Illegal dumping"/>
+                                    <ComboBoxItem Content="Street light repair"/>
+                                    <ComboBoxItem Content="Tree services"/>
+                                    <ComboBoxItem Content="Plumbing"/>
+                                    <ComboBoxItem Content="Trash"/>
+                                    <ComboBoxItem Content="Building damages"/>
+                                    <ComboBoxItem Content="Graffiti"/>
+                                    <ComboBoxItem Content="Sidewalk condition"/>
+                                    <ComboBoxItem Content="Lost property"/>
+                                    <ComboBoxItem Content="Dangerous weather"/>
+                                    <ComboBoxItem Content="Other"/>
+                                </ComboBox>
+                            </Grid>
+
+                            <Grid x:Name="SortSelectControlGrid" Grid.Row="2" Margin="6,0,6,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40" />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="28"/>
+                                </Grid.RowDefinitions>
+                                <CheckBox x:ConnectionId='17' x:Name="ReportsSortedByTypeCheckBox" Grid.Column="0" Grid.Row="0"                                                                 HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.92,-0.074"/>
+                                <TextBlock x:Name="SelectSortGroupTextblock" Grid.Column="1" Grid.Row="0"  FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Sort reports." Foreground="Black"/>
+                            </Grid>
+                            <Grid x:Name="SortGrid" Grid.Row="3" Visibility="Collapsed" Margin="4,0,4,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40" />
+                                    <ColumnDefinition Width="75" />
+                                    <ColumnDefinition Width="25" />
+                                    <ColumnDefinition Width="40" />
+                                    <ColumnDefinition Width="75" />
+                                    <ColumnDefinition Width="25" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="28"/>
+                                    <RowDefinition Height="28"/>
+                                    <RowDefinition Height="28"/>
+                                </Grid.RowDefinitions>
+                                <CheckBox x:ConnectionId='11'  x:Name="SortByTypeCheckBox"                         Grid.Row="0" Grid.Column="0"                                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="SortByTypeSelectGroupTextblock"             Grid.Row="0" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Text="by type." Foreground="Black"/>
+                                <TextBlock x:Name="ByTypeSelectedTextblock"                    Grid.Row="0" Grid.Column="2" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Text="0" Foreground="Blue"/>
+
+                                <CheckBox x:ConnectionId='12'  x:Name="SortByDateCheckBox"                         Grid.Row="0" Grid.Column="3"                                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="SortByDateSelectGroupTextblock"             Grid.Row="0" Grid.Column="4" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Text="by date." Foreground="Black"/>
+                                <TextBlock x:Name="ByDateSelectedTextblock"                    Grid.Row="0" Grid.Column="5" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Text="0" Foreground="Blue"/>
+
+                                <CheckBox x:ConnectionId='13'  x:Name="SortByAuthorCheckBox"                       Grid.Row="1" Grid.Column="0"                                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="SortByAuthorSelectGroupTextblock"           Grid.Row="1" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Text="by author." Foreground="Black"/>
+                                <TextBlock x:Name="ByAuthorSelectedTextblock"                  Grid.Row="1" Grid.Column="2" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Text="0" Foreground="Blue"/>
+
+                                <CheckBox x:ConnectionId='14'  x:Name="SortByStatusCheckBox"                       Grid.Row="1" Grid.Column="3"                                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="SortByStatusSelectGroupTextblock"           Grid.Row="1" Grid.Column="4" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Text="by status." Foreground="Black"/>
+                                <TextBlock x:Name="ByStatusSelectedTextblock"                  Grid.Row="1" Grid.Column="5" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Text="0" Foreground="Blue"/>
+
+                                <CheckBox x:ConnectionId='15'  x:Name="SortByPriorityCheckBox"                     Grid.Row="2" Grid.Column="0"                                                                       HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="false" Visibility="Collapsed"/>
+                                <TextBlock x:Name="SortByPrioritySelectGroupTextblock"         Grid.Row="2" Grid.Column="1" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Text="by priority." Foreground="Black" Visibility="Collapsed"/>
+                                <TextBlock x:Name="ByPrioritySelectedTextblock"                Grid.Row="2" Grid.Column="2" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Text="0" Foreground="Blue" Visibility="Collapsed"/>
+
+                                <CheckBox x:ConnectionId='16'  x:Name="SortByFrequencyCheckBox"                    Grid.Row="2" Grid.Column="3"                                                                         HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="false" Visibility="Collapsed"/>
+                                <TextBlock x:Name="SortByFrequencySelectSortGroupTextblock"    Grid.Row="2" Grid.Column="4" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Text="by frequency." Foreground="Black" Visibility="Collapsed"/>
+                                <TextBlock x:Name="ByFrequencySelectedTextblock"               Grid.Row="2" Grid.Column="5" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Text="0" Foreground="Blue" Visibility="Collapsed"/>
+
+                            </Grid>
+
+                            <Grid x:Name="MapControls" Grid.Row="4" Margin="6,0,6,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Button x:ConnectionId='8' Content="SIUC Buildings" x:Name="MarkBuildings" HorizontalAlignment="Left" VerticalAlignment="Top"                             Width="140" RenderTransformOrigin="0.78,0.526" Visibility="Visible" Grid.Row="0" Grid.Column="0" Foreground="Black" BorderBrush="Black">
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                            <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+                                
+                                <Button x:ConnectionId='9' Content="Clear Map" x:Name="ClearMapNow" HorizontalAlignment="Right" VerticalAlignment="Top"                           Width="105" RenderTransformOrigin="0.78,0.526" Visibility="Visible" Grid.Row="0" Grid.Column="1" Foreground="Black" BorderBrush="Black">
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                            <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>                                
+                                
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="38"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox x:ConnectionId='10' x:Name="RefreshMapCheckBox" Margin="2,0,0,0" Grid.Column="0"                                                               IsChecked="True" VerticalAlignment="Top" RenderTransformOrigin="0.92,-0.074" Visibility="Visible"/>
+                                    <TextBlock x:Name="SelectRefreshMapGroupTextblock" Margin="0,2,0,0" Grid.Column="1" FontSize="16" VerticalAlignment="Top" Text="Refresh map." Visibility="Visible" Foreground="Black"/>
+                                </Grid>
+                            </Grid>
+
+                            <Grid x:Name="Notification" Grid.Row="5" Margin="6,0,6,0">                                
+                                <TextBlock x:Name="NotificationTextblock" FontSize="16" VerticalAlignment="Top" Text="Welcome to SIU 311" Visibility="Visible" Foreground="Black"/>                                
+                            </Grid>
+
+                            <ProgressBar x:Name="ControlsProgressBar" Grid.Row="6" HorizontalAlignment="Center" IsIndeterminate="True" Height="20" Width="300" Margin="5,0,5,0" Visibility="Collapsed"/>
+
+                        </Grid>
+                        
+
+                        <Grid x:Name="ReportGrid" Grid.Column="1" Width="365" Margin="0,0,0,132">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="39"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock x:Name="ListBlock" Grid.Row="0" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="284" Visibility="Visible" Margin="10,0,0,0"/>
+                            <ListView x:ConnectionId='5' x:Name="ReportsListView" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="395" Height="569" Margin="-10,-10,0,0"                                 />
+
+                            <Button x:ConnectionId='6' Content="Previous" x:Name="Previous" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Bottom"                        Width="125" Visibility="Collapsed" Margin="30,0,0,0" Foreground="Black" BorderBrush="Black">
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                        <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <Button x:ConnectionId='7' Content="Next" x:Name="Next" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom"                    Width="125" Visibility="Collapsed" Margin="0,0,60,0" Foreground="Black" BorderBrush="Black">
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                        <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <ProgressRing x:Name="LoadingProgressRing" HorizontalAlignment="Left" Margin="146,292,0,0" VerticalAlignment="Top" Visibility="Visible" Height="80" Width="80" Grid.Row="1">
+                                <ProgressRing.Foreground>
+                                    <SolidColorBrush Color="#FF660000"/>
+                                </ProgressRing.Foreground>
+                            </ProgressRing>
+                        </Grid>
+
+                        <TextBlock x:Name="MapBlock" Grid.Column="2" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="25" Width="266" Margin="10,0,0,743" Visibility="Visible"/>
+
+                        <Grid x:Name="MapGrid" Grid.Column="2" VerticalAlignment="Top" Height="575">                            
+                            <bing:Map x:Name="Map" Credentials="{StaticResource BingMapsApiKey}" VerticalAlignment="Top" Height="525" Visibility="Visible" Margin="-10,34,0,0">
+
+                                <bing:Map.Children>
+                                    <!-- Data Layer-->
+                                    <bing:MapLayer Name="DataLayer"/>
+
+                                    <!--Common Infobox-->
+                                    <bing:MapLayer x:Name="MapPopup">
+
+                                        <Grid x:Name="Infobox" Visibility="Collapsed" Margin="0,-0,0,0" Opacity="0.85">
+                                            <Border Width="300" Height="152" BorderBrush="Black" BorderThickness="2"/>
+                                            <StackPanel Width="296"  Height="148" Margin="5">
+                                                <StackPanel.Background>
+                                                    <LinearGradientBrush StartPoint=".5,0" EndPoint=".5,1">
+                                                        <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                                        <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </StackPanel.Background>
+                                                <Grid Height="31" Background="Gray">
+                                                    <TextBlock x:Name="InfoBoxTitle" Margin="2,0,0,0" Text="Title" FontSize="16" Foreground="Black" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                                                    <Button x:ConnectionId='4' Padding="1" Margin="-2,0,0,0" FontFamily="Segoe UI Symbol" Content="&#xE10A;" Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Center"                              Visibility="Visible" Foreground="Black" BorderBrush="Black">
+                                                        <Button.Background>
+                                                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                                                <GradientStop Color="#FFD9D6CB" Offset="0"/>
+                                                                <GradientStop Color="#FF6C6C6C" Offset="1"/>
+                                                            </LinearGradientBrush>
+                                                        </Button.Background>
+                                                    </Button>
+
+                                                </Grid>
+
+                                                <Grid Height="116">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="86"/>
+                                                        <RowDefinition Height="30"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="200"/>
+                                                        <ColumnDefinition Width="100"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <ScrollViewer Grid.Column="0" Grid.Row="0" Margin="5,0,5,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                                        <TextBlock x:Name="InfoBoxDetails" Text="Details" FontSize="14" Foreground="Black" TextWrapping="Wrap" Height="Auto" Width="196"/>
+                                                    </ScrollViewer>
+
+                                                    <Image x:Name="InfoBoxPhoto" Margin="0,5,8,0" Grid.Column="1" Grid.Row="0" Stretch="Fill" AutomationProperties.Name="A placeholder image" Source="Assets/ImagePlaceHolder.png" Visibility="Visible"/>
+                                                    <Grid x:Name="InfoBoxControls" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" >
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="40"/>
+                                                            <ColumnDefinition Width="40"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Button x:ConnectionId='2' x:Name="InfoBoxRouteButton" Grid.Column="0" Padding="0" Width="38" Height="38"                                HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="Visible" Foreground="Black" BorderBrush="Transparent">
+                                                            <Image Source="Assets/WalkingIcon.png"/>
+                                                        </Button>
+                                                        <Button x:ConnectionId='3' x:Name="InfoBoxToReportButton" Grid.Column="1" FontSize="16" FontFamily="Segoe UI Symbol" Content="&#xE160;" Padding="0" Width="38" Height="38"                                 HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Visible" Foreground="Black" BorderBrush="Transparent"/>
+                                                    </Grid>
+                                                </Grid>
+
+                                            </StackPanel>
+                                            <Polygon Points="105,175 105,190 122,175" Stroke="Black" StrokeThickness="2">
+                                                <Polygon.Fill>
+                                                    <SolidColorBrush Color="Black" Opacity="0.65"/>
+                                                </Polygon.Fill>
+                                            </Polygon>
+                                        </Grid>
+
+                                    </bing:MapLayer>
+                                </bing:Map.Children>
+
+                            </bing:Map>
+                            
+                        </Grid>
+
+                        <TextBlock x:Name="PhotoBlock" Grid.Column="3" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="25" Width="266" Margin="50,0,0,743" Visibility="Visible"/>
+                        <Grid x:Name="PhotoGrid" Grid.Column="3" VerticalAlignment="Top">
+                            <Image x:Name="CapturedPhoto" AutomationProperties.Name="A placeholder image" Source="Assets/ImagePlaceHolder.png"  Height="575" Margin="35,-22,29,0" Visibility="Visible"/>
+                        </Grid>
+                        <TextBlock x:Name="VideoBlock" Grid.Column="4" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="25" Width="266" Margin="50,0,0,743" Visibility="Visible"/>
+                        <Grid x:Name="VideoGrid" Grid.Column="4" VerticalAlignment="Top">
+                            <MediaElement   x:Name="CapturedVideo" AutoPlay="True" Height="400" Margin="25,0,24,0" Visibility="Collapsed"/>
+                            <Image          x:Name="CapturedVideoHolder" AutomationProperties.Name="A placeholder image waiting for video" Source="Assets/VideoPlaceHolder.png"  Height="575" Margin="45,-28,34,0" Visibility="Visible"/>
+                        </Grid>
+
+                        <TextBlock x:Name="QueuedListBlock" FontSize="13" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="266" Margin="0,0,0,0" Visibility="Visible" Grid.Column="6"/>
+                        <Grid x:Name="QueuedGrid" Grid.Column="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="39"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+
+
+                            <ListView x:ConnectionId='1' x:Name="QueuedListView" HorizontalAlignment="Left" VerticalAlignment="Top" Width="395" Height="699" Margin="-10,29,-10,0"                                 Grid.RowSpan="2"/>
+
+                        </Grid>
+
+                    </Grid>
+
+                </GridView>
+
+            </ScrollViewer>
+
+        </Grid>
+
+        <VisualStateManager.VisualStateGroups>
+
+            <!-- Visual states reflect the application's view state -->
+            <VisualStateGroup x:Name="ApplicationViewStates">
+                <VisualState x:Name="FullScreenLandscape"/>
+                <VisualState x:Name="Filled">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ReportPopup" Storyboard.TargetProperty="HorizontalOffset">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="100"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ReportFormPopup" Storyboard.TargetProperty="HorizontalOffset">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="100"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <!-- The entire page respects the narrower 100-pixel margin convention for portrait -->
+                <VisualState x:Name="FullScreenPortrait">
+                    <Storyboard>
+
+                    </Storyboard>
+                </VisualState>
+
+                <VisualState x:Name="Snapped">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mrtb" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="mrb" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rvtb" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="rvb" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="tptb" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="tpb" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="tgc1" Storyboard.TargetProperty="Width">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="tgc2" Storyboard.TargetProperty="Width">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="tgc3" Storyboard.TargetProperty="Width">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+    </Grid>
+
+    <common:LayoutAwarePage.BottomAppBar>
+        <AppBar x:Name="bottomAppBar">
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button x:ConnectionId='42' x:Name="ExitButton" Content="Exit"                   />
+                    <Button x:ConnectionId='43' x:Name="ConnectButton" Content="Connect"                      />
+                    <Button x:ConnectionId='44' x:Name="HelpButton" Content="Help"                   />
+                </StackPanel>
+            </Grid>
+        </AppBar>
+    </common:LayoutAwarePage.BottomAppBar>
+
+</common:LayoutAwarePage>
+

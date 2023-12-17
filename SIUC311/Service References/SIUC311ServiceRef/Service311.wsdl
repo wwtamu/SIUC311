@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service311" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://it-appdev1.ad.siu.edu/SIUC311Services/311Service.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://it-appdev1.ad.siu.edu/SIUC311Services/311Service.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://it-appdev1.ad.siu.edu/SIUC311Services/311Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SIUC311Services" />
+      <xsd:import schemaLocation="http://it-appdev1.ad.siu.edu/SIUC311Services/311Service.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="I311Service_BeginSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:BeginSession" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_BeginSession_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BeginSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_CheckPermissions_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckPermissions" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_CheckPermissions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckPermissionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_IsSessionAlive_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsSessionAlive" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_IsSessionAlive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsSessionAliveResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_EndSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndSession" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_EndSession_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_InsertReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertReport" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_InsertReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_InsertPhoto_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertPhoto" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_InsertPhoto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertPhotoResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_RemoveReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveReport" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_RemoveReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_GetAllReports_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllReports" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_GetAllReports_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllReportsResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_GetMyReports_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyReports" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_GetMyReports_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyReportsResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_GetAllReportsByType_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllReportsByType" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_GetAllReportsByType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllReportsByTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_GetMyReportsByType_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyReportsByType" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_GetMyReportsByType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyReportsByTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_GetPagingState_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPagingState" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_GetPagingState_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPagingStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_GetPhoto_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhoto" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_GetPhoto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPhotoResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_GetStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStatus" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_GetStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_GetReportManagement_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportManagement" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_GetReportManagement_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReportManagementResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_CloseReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:CloseReport" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_CloseReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CloseReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_OpenReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:OpenReport" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_OpenReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OpenReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_ElevateReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:ElevateReport" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_ElevateReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ElevateReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_ClaimReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:ClaimReport" />
+  </wsdl:message>
+  <wsdl:message name="I311Service_ClaimReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ClaimReportResponse" />
+  </wsdl:message>
+  <wsdl:portType name="I311Service">
+    <wsdl:operation name="BeginSession">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/BeginSession" message="tns:I311Service_BeginSession_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/BeginSessionResponse" message="tns:I311Service_BeginSession_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckPermissions">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/CheckPermissions" message="tns:I311Service_CheckPermissions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/CheckPermissionsResponse" message="tns:I311Service_CheckPermissions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsSessionAlive">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/IsSessionAlive" message="tns:I311Service_IsSessionAlive_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/IsSessionAliveResponse" message="tns:I311Service_IsSessionAlive_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndSession">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/EndSession" message="tns:I311Service_EndSession_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/EndSessionResponse" message="tns:I311Service_EndSession_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/InsertReport" message="tns:I311Service_InsertReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/InsertReportResponse" message="tns:I311Service_InsertReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertPhoto">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/InsertPhoto" message="tns:I311Service_InsertPhoto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/InsertPhotoResponse" message="tns:I311Service_InsertPhoto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/RemoveReport" message="tns:I311Service_RemoveReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/RemoveReportResponse" message="tns:I311Service_RemoveReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReports">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/GetAllReports" message="tns:I311Service_GetAllReports_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/GetAllReportsResponse" message="tns:I311Service_GetAllReports_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyReports">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/GetMyReports" message="tns:I311Service_GetMyReports_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/GetMyReportsResponse" message="tns:I311Service_GetMyReports_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReportsByType">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/GetAllReportsByType" message="tns:I311Service_GetAllReportsByType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/GetAllReportsByTypeResponse" message="tns:I311Service_GetAllReportsByType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyReportsByType">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/GetMyReportsByType" message="tns:I311Service_GetMyReportsByType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/GetMyReportsByTypeResponse" message="tns:I311Service_GetMyReportsByType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPagingState">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/GetPagingState" message="tns:I311Service_GetPagingState_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/GetPagingStateResponse" message="tns:I311Service_GetPagingState_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPhoto">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/GetPhoto" message="tns:I311Service_GetPhoto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/GetPhotoResponse" message="tns:I311Service_GetPhoto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/GetStatus" message="tns:I311Service_GetStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/GetStatusResponse" message="tns:I311Service_GetStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReportManagement">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/GetReportManagement" message="tns:I311Service_GetReportManagement_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/GetReportManagementResponse" message="tns:I311Service_GetReportManagement_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/CloseReport" message="tns:I311Service_CloseReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/CloseReportResponse" message="tns:I311Service_CloseReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/OpenReport" message="tns:I311Service_OpenReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/OpenReportResponse" message="tns:I311Service_OpenReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ElevateReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/ElevateReport" message="tns:I311Service_ElevateReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/ElevateReportResponse" message="tns:I311Service_ElevateReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ClaimReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/I311Service/ClaimReport" message="tns:I311Service_ClaimReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/I311Service/ClaimReportResponse" message="tns:I311Service_ClaimReport_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_I311Service" type="tns:I311Service">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="BeginSession">
+      <soap:operation soapAction="http://tempuri.org/I311Service/BeginSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPermissions">
+      <soap:operation soapAction="http://tempuri.org/I311Service/CheckPermissions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsSessionAlive">
+      <soap:operation soapAction="http://tempuri.org/I311Service/IsSessionAlive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndSession">
+      <soap:operation soapAction="http://tempuri.org/I311Service/EndSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertReport">
+      <soap:operation soapAction="http://tempuri.org/I311Service/InsertReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertPhoto">
+      <soap:operation soapAction="http://tempuri.org/I311Service/InsertPhoto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveReport">
+      <soap:operation soapAction="http://tempuri.org/I311Service/RemoveReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReports">
+      <soap:operation soapAction="http://tempuri.org/I311Service/GetAllReports" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyReports">
+      <soap:operation soapAction="http://tempuri.org/I311Service/GetMyReports" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReportsByType">
+      <soap:operation soapAction="http://tempuri.org/I311Service/GetAllReportsByType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyReportsByType">
+      <soap:operation soapAction="http://tempuri.org/I311Service/GetMyReportsByType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPagingState">
+      <soap:operation soapAction="http://tempuri.org/I311Service/GetPagingState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPhoto">
+      <soap:operation soapAction="http://tempuri.org/I311Service/GetPhoto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatus">
+      <soap:operation soapAction="http://tempuri.org/I311Service/GetStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportManagement">
+      <soap:operation soapAction="http://tempuri.org/I311Service/GetReportManagement" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseReport">
+      <soap:operation soapAction="http://tempuri.org/I311Service/CloseReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenReport">
+      <soap:operation soapAction="http://tempuri.org/I311Service/OpenReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ElevateReport">
+      <soap:operation soapAction="http://tempuri.org/I311Service/ElevateReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClaimReport">
+      <soap:operation soapAction="http://tempuri.org/I311Service/ClaimReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service311">
+    <wsdl:port name="BasicHttpBinding_I311Service" binding="tns:BasicHttpBinding_I311Service">
+      <soap:address location="http://it-appdev1.ad.siu.edu/SIUC311Services/311Service.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

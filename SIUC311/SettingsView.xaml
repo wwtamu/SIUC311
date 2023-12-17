@@ -1,0 +1,18 @@
+﻿<UserControl
+    x:Class="SIUC311.SettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SIUC311"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="800"
+    d:DesignWidth="400">
+    
+    <StackPanel x:Name="SettingsFlyout">        
+        <TextBlock Text="Automatically submit queued reports." FontSize="12" Foreground="White" HorizontalAlignment="Center"/>
+        <ToggleSwitch x:Name="AutoSubmitToggleSwitch" Foreground="White" Background="Maroon" Toggled="ToggleAutoSubmit" HorizontalAlignment="Center"/>
+        <Button x:Name="SubmitQueueButton" Content="Submit Queue" Foreground="White" Click="SubmitQueueButton_Clicked" HorizontalAlignment="Center"/>
+        <Button x:Name="DeleteQueueButton" Content="Delete Queue" Foreground="White" Click="DeleteQueueButton_Clicked" HorizontalAlignment="Center"/>
+    </StackPanel>
+</UserControl>

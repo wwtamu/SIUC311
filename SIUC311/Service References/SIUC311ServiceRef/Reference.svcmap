@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="eafdf8c6-4cf9-4543-a035-3305a675fb2c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://it-appdev1.ad.siu.edu/SIUC311Services/311Service.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="311Service.xsd" MetadataType="Schema" ID="050a8b81-353e-4365-aae7-bd033d9c0e3c" SourceId="1" SourceUrl="http://it-appdev1.ad.siu.edu/SIUC311Services/311Service.svc?xsd=xsd3" />
+    <MetadataFile FileName="Service311.wsdl" MetadataType="Wsdl" ID="ea47b240-f119-4f87-8748-02a4b0d85ad5" SourceId="1" SourceUrl="http://it-appdev1.ad.siu.edu/SIUC311Services/311Service.svc?wsdl" />
+    <MetadataFile FileName="311Service1.xsd" MetadataType="Schema" ID="faddc7bb-0e0b-4633-8417-fef9308b64d8" SourceId="1" SourceUrl="http://it-appdev1.ad.siu.edu/SIUC311Services/311Service.svc?xsd=xsd1" />
+    <MetadataFile FileName="311Service.disco" MetadataType="Disco" ID="92af529a-7336-44af-891f-084afbdf7e4f" SourceId="1" SourceUrl="http://it-appdev1.ad.siu.edu/SIUC311Services/311Service.svc?disco" />
+    <MetadataFile FileName="311Service2.xsd" MetadataType="Schema" ID="02c59f3e-4091-4550-84d4-550d670eac35" SourceId="1" SourceUrl="http://it-appdev1.ad.siu.edu/SIUC311Services/311Service.svc?xsd=xsd2" />
+    <MetadataFile FileName="311Service3.xsd" MetadataType="Schema" ID="11c804be-553a-4fc2-a190-cd584b3466a5" SourceId="1" SourceUrl="http://it-appdev1.ad.siu.edu/SIUC311Services/311Service.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
